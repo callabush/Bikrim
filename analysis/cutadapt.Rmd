@@ -1,0 +1,44 @@
+---
+title: "Cutadapt"
+author: "Calla Bush St George"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{bash}
+# Set environment per BioHPC instructions
+export PYTHONPATH=/programs/cutadapt-4.1/lib/python3.9/site-packages:/programs/cutadapt-4.1/lib64/python3.9/site-packages
+export PATH=/programs/cutadapt-4.1/bin:$PATH
+
+# Run command to test on one sample
+cutadapt -g TCGTCGGCAGCGTCAGATGTGTATAAGAGACAGCCTACGGGNGGCWGCAG \
+-G GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAGGACTACHVGGGTATCTAATCC \
+--discard-untrimmed \
+-o G196_III_trim_1.fastq.gz -p G196_III_trim_2.fastq.gz \
+G196_III_1.fastq.gz G196_III_2.fastq.gz
+
+# Run loop on all sample files 
+for sample in $(cat ../Bikrim_samples.txt)
+
+do
+
+echo "On sample: $sample"
+
+cutadapt -g TCGTCGGCAGCGTCAGATGTGTATAAGAGACAGCCTACGGGNGGCWGCAG \
+-G GTCTCGTGGGCTCGGAGATGTGTATAAGAGACAGGACTACHVGGGTATCTAATCC \
+--discard-untrimmed \
+-o ${sample}_trim_1.fastq.gz -p ${sample}_trim_2.fastq.gz \
+${sample}_1.fastq.gz ${sample}_2.fastq.gz \
+>> cutadapt_primer_trimming_stats.txt 2>&1
+
+done
+
+# Check percent reads kept, outputs table below
+paste ../Bikrim_samples.txt <(grep "passing" cutadapt_primer_trimming_stats.txt | cut -f3 -d "(" | tr -d ")") <(grep "filtered" cutadapt_primer_trimming_stats.txt | cut -f3 -d "(" | tr -d ")")
+
+```
+

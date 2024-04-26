@@ -72,7 +72,7 @@ pacman::p_load(tidyverse, devtools, dada2, phyloseq, patchwork, DT,
 ```{r load data}
 #Set the raw fastq path to the raw sequencing files
 #Path to the fastq files
-raw_fastqs_path <- "data/01_DADA2/01_raw_gzipped_fastqs"
+raw_fastqs_path <- "data/00_cutadapt/01_raw_gzipped_fastqs"
 raw_fastqs_path
 #What files are in this path (Intuition check)
 list.files(raw_fastqs_path)
@@ -81,12 +81,14 @@ list.files(raw_fastqs_path)
 str(list.files(raw_fastqs_path))
 
 #Create a vector of forward reads
-forward_reads <- list.files(raw_fastqs_path, pattern = "_1.fastq.gz", full.names = TRUE) 
+forward_reads <- 
+  list.files(raw_fastqs_path, pattern = "1.fastq.gz", full.names = TRUE) 
 #Intuition check
 head(forward_reads)
 
 #Create a vector of reverse reads
-reverse_reads <-list.files(raw_fastqs_path, pattern = "_2.fastq.gz", full.names = TRUE)
+reverse_reads <-
+  list.files(raw_fastqs_path, pattern = "2.fastq.gz", full.names = TRUE)
 #Intuition check
 head(reverse_reads)
 
@@ -106,10 +108,12 @@ random_samples <- sample(1:length(reverse_reads), size = 12)
 random_samples
 
 # Calculate and plot quality of these two samples
-forward_filteredQual_plot_14 <- plotQualityProfile(forward_reads[random_samples]) + 
+forward_filteredQual_plot_14 <- 
+  plotQualityProfile(forward_reads[random_samples]) + 
   labs(title = "Forward Read Raw Quality")
 
-reverse_filteredQual_plot_14 <- plotQualityProfile(reverse_reads[random_samples]) + 
+reverse_filteredQual_plot_14 <- 
+  plotQualityProfile(reverse_reads[random_samples]) + 
   labs(title = "Reverse Read Raw Quality")
 
 
@@ -123,10 +127,12 @@ forward_filteredQual_plot_14 + reverse_filteredQual_plot_14
 
 ```{r prep-filtered-reads}
 # vector of our samples, extract the sample information from our file
-samples <- scan("/local/workdir/cab565/git_repos/Bikrim/data/00_cutadapt/Birkim_samples.txt",
+samples <- 
+  scan("/local/workdir/cab565/git_repos/Bikrim/data/00_cutadapt/Bikrim_samples.txt",
                 what = "character")
 #Intuition check
 head(samples)
+
 
 #place filtered reads into filtered_fastqs_path
 filtered_fastqs_path <- "data/01_DADA2/02_filtered_fastqs"
@@ -237,7 +243,7 @@ postQC_aggregate_plot
 
 ## Stats on read output from `filterAndTrim`
 
-```{r}
+```{r filterAndTrim-stats}
 #Make output into dataframe
 filtered_df <- as.data.frame(filtered_reads)
 head(filtered_df)
@@ -366,11 +372,10 @@ data.frame(Seq_Length = nchar(getSequences(raw_ASV_table))) %>%
 ###################################################
 ###################################################
 # TRIM THE ASVS
-# Let's trim the ASVs to only be the right size, which is 249.
-# 249 originates from our expected amplicon of 252 - 3bp in the forward read due to low quality.
+# Let's trim the ASVs to only be the right size, which is 355.
 
 # We will allow for a few 
-raw_ASV_table_trimmed <- raw_ASV_table[,nchar(colnames(raw_ASV_table)) %in% 354:361]
+raw_ASV_table_trimmed <- raw_ASV_table[,nchar(colnames(raw_ASV_table)) %in% 355]
 
 # Inspect the distribution of sequence lengths of all ASVs in dataset 
 table(nchar(getSequences(raw_ASV_table_trimmed)))
@@ -384,14 +389,8 @@ data.frame(Seq_Length = nchar(getSequences(raw_ASV_table_trimmed))) %>%
   ggplot(aes(x = Seq_Length )) + 
   geom_histogram() + 
   labs(title = "Trimmed distribution of ASV length")
-# Note the peak at 249 is ABOVE 3000
 
-# Let's zoom in on the plot 
-data.frame(Seq_Length = nchar(getSequences(raw_ASV_table_trimmed))) %>%
-  ggplot(aes(x = Seq_Length )) + 
-  geom_histogram() + 
-  labs(title = "Trimmed distribution of ASV length") + 
-  scale_y_continuous(limits = c(0, 500))
+
 ```
 
 Taking into account the lower, zoomed-in plot. Do we want to remove those extra ASVs?
@@ -424,7 +423,7 @@ data.frame(Seq_Length_NoChim = nchar(getSequences(noChimeras_ASV_table))) %>%
   ggplot(aes(x = Seq_Length_NoChim )) + 
   geom_histogram()+ 
   labs(title = "Trimmed + Chimera Removal distribution of ASV length")
-# Note the difference in the peak at 249, which is now BELOW 3000
+
 ```
 
 # Track the read counts
