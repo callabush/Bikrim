@@ -1,0 +1,10 @@
+﻿names,BioSample,AvgSpotLen,Bases,Bytes,Collection_Date,env_local_scale,env_medium,Experiment,Host_Diet,Host,Library Name,create_date,Sample.Name,replicate,Region,Location,Sex,Sample_or_Control
+ERR3585831,SAMEA6061589,600,41680233,21005371,2018-05,Midgut,fecal material (ENVO_00002003),ERX3581773,Herbivorus,Kyphosus sydneyanus,KS.SCFA.G196IV-16S,2019-12-09T07:09:00Z,G196_IV,,Oceania,New Zealand,,Sample
+ERR3585834,SAMEA6061592,600,29222137,15071818,2018-05,Midgut,fecal material (ENVO_00002003),ERX3581776,Herbivorus,Kyphosus sydneyanus,KS.SCFA.G197IV-16S,2019-12-09T07:10:00Z,G197_IV,,Oceania,New Zealand,,Sample
+ERR3585835,SAMEA6061593,598,78579881,38753053,2018-05,Hindgut,fecal material (ENVO_00002003),ERX3581777,Herbivorus,Kyphosus sydneyanus,KS.SCFA.G197V-16S,2019-12-09T07:10:00Z,G197_V,,Oceania,New Zealand,,Sample
+ERR3585837,SAMEA6061595,598,113151943,57870566,2018-05,Midgut,fecal material (ENVO_00002003),ERX3581779,Herbivorus,Kyphosus sydneyanus,KS.SCFA.G198IV-16S,2019-12-09T07:10:00Z,G198_IV,,Oceania,New Zealand,,Sample
+ERR3585838,SAMEA6061596,597,126001340,61842884,2018-05,Hindgut,fecal material (ENVO_00002003),ERX3581780,Herbivorus,Kyphosus sydneyanus,KS.SCFA.G198V-16S,2019-12-09T07:10:00Z,G198_V,,Oceania,New Zealand,,Sample
+ERR3585840,SAMEA6061598,598,190680171,98119553,2018-05,Midgut,fecal material (ENVO_00002003),ERX3581782,Herbivorus,Kyphosus sydneyanus,KS.SCFA.G199IV-16S,2019-12-09T07:11:00Z,G199_IV,,Oceania,New Zealand,,Sample
+ERR3585843,SAMEA6061601,600,184723385,92329890,2018-05,Midgut,fecal material (ENVO_00002003),ERX3581785,Herbivorus,Kyphosus sydneyanus,KS.SCFA.G200IV-16S,2019-12-09T07:11:00Z,G200_IV,,Oceania,New Zealand,,Sample
+ERR3585844,SAMEA6061602,597,73530687,36024470,2018-05,Hindgut,fecal material (ENVO_00002003),ERX3581786,Herbivorus,Kyphosus sydneyanus,KS.SCFA.G200V-16S,2019-12-09T07:11:00Z,G200_V,,Oceania,New Zealand,,Sample
+ERR3585846,SAMEA6061604,463,11071509,6925602,2018-05,Hindgut,fecal material (ENVO_00002003),ERX3581788,Herbivorus,Kyphosus sydneyanus,KS.SCFA.G201V-16S,2019-12-09T07:12:00Z,G201_V,,Oceania,New Zealand,,Sample
